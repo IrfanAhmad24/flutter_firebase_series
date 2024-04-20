@@ -67,23 +67,33 @@ class UiHelper {
     );
   }
 
-  static CustomUserNote(
-    controller,
-    bool hide,
-    String hintText,
-  ) {
+  static Widget buildButton(VoidCallback onPressed, String text) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: TextField(
-        enabled: true,
-        maxLines: 20,
-        controller: controller,
-        decoration: InputDecoration.collapsed(
-          hintText: hintText,
-          enabled: true,
-          border: InputBorder.none,
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 45),
+      child: SizedBox(
+        height: 60,
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.deepPurple),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+          ),
+          onPressed: () {
+            if (onPressed != null) {
+              onPressed(); // Call the callback function
+            }
+          },
+          child: Text(
+            text,
+            style: const TextStyle(
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w600),
+          ),
         ),
-        obscureText: hide,
       ),
     );
   }
